@@ -1,4 +1,21 @@
 <script setup>
+import { onMounted, ref } from 'vue';
+
+const content = ref([]);
+
+
+onMounted(() => {
+  const fetchJokes = async () => {
+    try {
+      const response = await fetch('https://api.chucknorris.io/jokes/random');
+      content.value = await response.json();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  fetchJokes();
+});
 
 </script>
 
@@ -33,7 +50,11 @@
                 </h3>
                 <p>(Whitebording tool)</p>
             </div>
-            <div class="three">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta tempore, alias illum et adipisci enim quibusdam, ipsam minima quia expedita perspiciatis beatae excepturi cum dolores ex animi possimus. Aspernatur, voluptatem!</div>
+            <div class="three">
+                <p>
+                    {{ content.value }}
+                </p>
+                </div>
             <div class="four">                    <button>
                         <svg style="width: 20px;" fill="#000000" viewBox="0 0 24 24" id="turn-right-down-direction" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line" transform="matrix(1, 0, 0, -1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path id="primary" d="M19,18H6a1,1,0,0,1-1-1V3" style="fill: none; stroke: #F3F4F1; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path><polyline id="primary-2" data-name="primary" points="16 21 19 18 16 15" style="fill: none; stroke: #F3F4F1; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></polyline></g></svg>
                         Let's connect
